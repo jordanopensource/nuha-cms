@@ -31,7 +31,8 @@
           "localized": true
         }
       },
-      "targetField": "title"
+      "targetField": "title",
+      "required": true
     },
     "abstract": {
       "type": "text",
@@ -42,11 +43,15 @@
       }
     },
     "body": {
-      "type": "blocks",
+      "type": "customField",
       "pluginOptions": {
         "i18n": {
           "localized": true
         }
+      },
+      "customField": "plugin::ckeditor5.CKEditor",
+      "options": {
+        "preset": "defaultMarkdown"
       }
     },
     "cover": {

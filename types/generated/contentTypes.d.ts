@@ -517,7 +517,13 @@ export interface ApiPublicationPublication extends Struct.CollectionTypeSchema {
         };
       }>;
     authors: Schema.Attribute.Relation<'manyToMany', 'api::author.author'>;
-    body: Schema.Attribute.Blocks &
+    body: Schema.Attribute.RichText &
+      Schema.Attribute.CustomField<
+        'plugin::ckeditor5.CKEditor',
+        {
+          preset: 'defaultMarkdown';
+        }
+      > &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
           localized: true;
@@ -552,6 +558,7 @@ export interface ApiPublicationPublication extends Struct.CollectionTypeSchema {
       'api::publication.publication'
     >;
     slug: Schema.Attribute.UID<'title'> &
+      Schema.Attribute.Required &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
           localized: true;
