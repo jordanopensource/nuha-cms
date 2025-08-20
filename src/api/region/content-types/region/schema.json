@@ -22,6 +22,8 @@
           "localized": false
         }
       },
+      "minLength": 2,
+      "maxLength": 2,
       "required": true,
       "unique": true
     },

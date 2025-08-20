@@ -650,6 +650,10 @@ export interface ApiRegionRegion extends Struct.CollectionTypeSchema {
         i18n: {
           localized: false;
         };
+      }> &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 2;
+        minLength: 2;
       }>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
