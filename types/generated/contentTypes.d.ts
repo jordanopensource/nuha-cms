@@ -571,7 +571,7 @@ export interface ApiPublicationPublication extends Struct.CollectionTypeSchema {
       Schema.Attribute.CustomField<
         'plugin::ckeditor5.CKEditor',
         {
-          preset: 'defaultMarkdown';
+          preset: 'defaultHtml';
         }
       > &
       Schema.Attribute.SetPluginOptions<{
@@ -652,8 +652,8 @@ export interface ApiRegionRegion extends Struct.CollectionTypeSchema {
         };
       }> &
       Schema.Attribute.SetMinMaxLength<{
-        maxLength: 2;
-        minLength: 2;
+        maxLength: 3;
+        minLength: 3;
       }>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
