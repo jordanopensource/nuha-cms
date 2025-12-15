@@ -49,6 +49,15 @@
       "relation": "manyToMany",
       "target": "api::publication.publication",
       "mappedBy": "regions"
+    },
+    "is_available": {
+      "type": "boolean",
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "default": true
     }
   }
 }
