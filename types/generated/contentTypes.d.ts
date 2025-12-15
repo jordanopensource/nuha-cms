@@ -715,6 +715,13 @@ export interface ApiRegionRegion extends Struct.CollectionTypeSchema {
           localized: false;
         };
       }>;
+    is_available: Schema.Attribute.Boolean &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: false;
+        };
+      }> &
+      Schema.Attribute.DefaultTo<true>;
     locale: Schema.Attribute.String;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::region.region'>;
     name: Schema.Attribute.String &
