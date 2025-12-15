@@ -16,6 +16,8 @@ repos:
         id: check-yaml
         types: ["yaml"]
       - id: check-merge-conflict
+      - id: check-toml
+        types: ['toml']
       - id: check-added-large-files
       - id: trailing-whitespace
       - id: end-of-file-fixer
