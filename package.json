@@ -24,9 +24,9 @@
     "@strapi/strapi": "5.50.0",
     "better-sqlite3": "11.3.0",
     "pg": "^8.22.0",
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0",
-    "react-router-dom": "^6.0.0",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "react-router-dom": "^7.18.1",
     "strapi-plugin-redis": "^1.1.0",
     "strapi-provider-rest-cache-redis": "^4.2.9",
     "styled-components": "^6.4.4"
