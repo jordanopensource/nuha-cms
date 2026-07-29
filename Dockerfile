@@ -1,27 +1,19 @@
-FROM node:22-alpine
+FROM node:22-slim
 
 WORKDIR /opt/
 
-RUN apk update && apk add --no-cache \
-    build-base \
-    gcc \
-    autoconf \
-    automake \
-    zlib-dev \
-    libpng-dev \
-    nasm \
-    bash \
-    vips-dev \
+RUN apt-get update && apt-get install -y --no-install-recommends \
     python3 \
     make \
-    g++
+    g++ \
+    wget \
+    && rm -rf /var/lib/apt/lists/*
 
 ARG NODE_ENV=development
 ENV NODE_ENV=${NODE_ENV}
 
 COPY package.json yarn.lock ./
 
-RUN yarn global add node-gyp
 RUN yarn config set network-timeout 600000 -g && yarn install
 ENV PATH=/opt/node_modules/.bin:$PATH
 
