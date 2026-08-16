@@ -56,7 +56,7 @@ steps:
         - CI_REPO_URL=${CI_REPO_URL}
         - CI_REPO_NAME=${CI_REPO_NAME}
         - CI_PIPELINE_URL=${CI_PIPELINE_URL}
-        - CI_PIPELINE_CREATED=${CI_PIPELINE_CREATED}N
+        - CI_PIPELINE_CREATED=${CI_PIPELINE_CREATED}
     depends_on:
       - run-pre-commit-hooks
 
