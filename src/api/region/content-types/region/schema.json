@@ -50,6 +50,12 @@
       "target": "api::publication.publication",
       "mappedBy": "regions"
     },
+    "partners": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::partner.partner",
+      "mappedBy": "regions"
+    },
     "is_available": {
       "type": "boolean",
       "pluginOptions": {
