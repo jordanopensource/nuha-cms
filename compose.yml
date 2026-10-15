@@ -1,0 +1,78 @@
+version: '3.8'
+
+services:
+  strapi:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "1337:1337"
+    environment:
+      - NODE_ENV=development
+      - DATABASE_CLIENT=sqlite
+      - DATABASE_FILENAME=.tmp/data.db
+      # Inside the compose network Redis is reachable by its service name, not localhost.
+      # This overrides REDIS_HOST from the baked-in .env.
+      - REDIS_HOST=redis
+      - JWT_SECRET=your-jwt-secret-here
+      - API_TOKEN_SALT=your-api-token-salt-here
+      - ADMIN_JWT_SECRET=your-admin-jwt-secret-here
+      - TRANSFER_TOKEN_SALT=your-transfer-token-salt-here
+    volumes:
+      - ./.tmp:/opt/app/.tmp
+      - ./public/uploads:/opt/app/public/uploads
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://0.0.0.0:1337/admin"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+    networks:
+      - nuha-network
+  # Optional: PostgreSQL database service
+  # Uncomment if you want to use PostgreSQL instead of SQLite
+  # postgres:
+  #   image: postgres:15-alpine
+  #   environment:
+  #     - POSTGRES_DB=strapi
+  #     - POSTGRES_USER=strapi
+  #     - POSTGRES_PASSWORD=strapi
+  #   volumes:
+  #     - postgres_data:/var/lib/postgresql/data
+  #   ports:
+  #     - "5432:5432"
+  #   restart: unless-stopped
+
+  # Optional: Strapi service with PostgreSQL
+  # strapi-postgres:
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - "1337:1337"
+  #   environment:
+  #     - NODE_ENV=development
+  #     - DATABASE_CLIENT=postgres
+  #     - DATABASE_HOST=postgres
+  #     - DATABASE_PORT=5432
+  #     - DATABASE_NAME=strapi
+  #     - DATABASE_USERNAME=strapi
+  #     - DATABASE_PASSWORD=strapi
+  #     - JWT_SECRET=your-jwt-secret-here
+  #     - API_TOKEN_SALT=your-api-token-salt-here
+  #     - ADMIN_JWT_SECRET=your-admin-jwt-secret-here
+  #     - TRANSFER_TOKEN_SALT=your-transfer-token-salt-here
+  #   volumes:
+  #     - ./public/uploads:/opt/app/public/uploads
+  #   depends_on:
+  #     - postgres
+  #   restart: unless-stopped
+
+networks:
+  nuha-network:
+    external: true
+    name: nuha-network
+
+# volumes:
+#   postgres_data:
